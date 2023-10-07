@@ -48,14 +48,8 @@ comments = get_video_comments(
 
 sentiments = analyze_sentiments(comments)
 
-for i, comment in enumerate(comments):
-    sentiment = sentiments[i]
-    if sentiment > 0:
-        sentiment_label = "Positivo 😀"
-    elif sentiment < 0:
-        sentiment_label = "Negativo ☹️"
-    else:
-        sentiment_label = "Neutro 😐"
-    print(f"Comentário {i+1}:")
+for i, (comment, sentiment) in enumerate(zip(comments, sentiments)):
+    sentiment_label = "Positivo 😀" if sentiment > 0 else ("Negativo ☹️" if sentiment < 0 else "Neutro 😐")
+    print(f"Comentário {i + 1}:")
     print(f"Texto: {comment}")
-    print(f"Sentimento: {sentiment_label} \n")
+    print(f"Sentimento: {sentiment_label}\n")
