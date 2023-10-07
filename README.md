@@ -1,3 +1,5 @@
+Projeto em python para detectar sentimentos em comentários dos videos do YouTube utilizando a API oficial.
+
 1. Acesse o Console de Desenvolvedor do Google.
 2. Clique em "Selecione um projeto" ou crie um novo projeto.
 3. No painel de navegação à esquerda, clique em "APIs e Serviços" > "Credenciais".
