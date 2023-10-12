@@ -12,7 +12,7 @@ if API_KEY is None:
 
 youtube_service = googleapiclient.discovery.build('youtube', 'v3', developerKey=API_KEY)
 
-video_id = 'Zek59mGIn1M'
+video_id = 'L-0Rbi7jsPQ'
 
 def get_video_comments(youtube, **kwargs):
     comments = []
