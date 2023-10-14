@@ -54,8 +54,9 @@ def main():
 
     sentiments = analyze_sentiments(comments)
 
-    for i, (comment, sentiment) in enumerate(zip(comments, sentiments)):
+    for i, (comment, sentiment) in enumerate(zip(comments, sentiments), start=1):
         sentiment_label = "Positivo 😀" if sentiment > 0 else ("Negativo ☹️" if sentiment < 0 else "Neutro 😐")
+        print(f"Comentário {i}:")
         print(f"Texto: {comment}")
         print(f"Sentimento: {sentiment_label}\n")
 
