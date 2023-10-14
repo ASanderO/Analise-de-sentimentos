@@ -56,7 +56,6 @@ def main():
 
     for i, (comment, sentiment) in enumerate(zip(comments, sentiments)):
         sentiment_label = "Positivo 😀" if sentiment > 0 else ("Negativo ☹️" if sentiment < 0 else "Neutro 😐")
-        print(f"Comentário {i + 1}:")
         print(f"Texto: {comment}")
         print(f"Sentimento: {sentiment_label}\n")
 
