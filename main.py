@@ -1,4 +1,5 @@
 import os
+import argparse
 import googleapiclient.discovery
 from dotenv import load_dotenv
 from textblob import TextBlob
@@ -11,8 +12,6 @@ if API_KEY is None:
     raise Exception("A chave de API não foi encontrada no arquivo .env")
 
 youtube_service = googleapiclient.discovery.build('youtube', 'v3', developerKey=API_KEY)
-
-video_id = 'L-0Rbi7jsPQ'
 
 def get_video_comments(youtube, **kwargs):
     comments = []
@@ -39,17 +38,27 @@ def analyze_sentiments(comments):
         sentiments.append(sentiment)
     return sentiments
 
-comments = get_video_comments(
-    youtube_service,
-    part='snippet',
-    videoId=video_id,
-    textFormat='plainText'
-)
+def main():
+    parser = argparse.ArgumentParser(description="Analyze sentiments of YouTube video comments.")
+    parser.add_argument('videoid', type=str, help="YouTube video ID")
 
-sentiments = analyze_sentiments(comments)
+    args = parser.parse_args()
+    video_id = args.videoid
 
-for i, (comment, sentiment) in enumerate(zip(comments, sentiments)):
-    sentiment_label = "Positivo 😀" if sentiment > 0 else ("Negativo ☹️" if sentiment < 0 else "Neutro 😐")
-    print(f"Comentário {i + 1}:")
-    print(f"Texto: {comment}")
-    print(f"Sentimento: {sentiment_label}\n")
+    comments = get_video_comments(
+        youtube_service,
+        part='snippet',
+        videoId=video_id,
+        textFormat='plainText'
+    )
+
+    sentiments = analyze_sentiments(comments)
+
+    for i, (comment, sentiment) in enumerate(zip(comments, sentiments)):
+        sentiment_label = "Positivo 😀" if sentiment > 0 else ("Negativo ☹️" if sentiment < 0 else "Neutro 😐")
+        print(f"Texto: {comment}")
+        print(f"Sentimento: {sentiment_label}\n")
+
+
+if __name__ == "__main__":
+    main()
